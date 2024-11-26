@@ -26,7 +26,7 @@ export class Canvas {
 		this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 	};
 
-	draw = (drawFunctions: [() => void] | null) => () => {
+	draw = (drawFunctions: (() => void)[] | null) => () => {
 		this.clearCanvas();
 
 		if (drawFunctions) {

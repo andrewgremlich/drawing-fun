@@ -6,20 +6,18 @@ export class Pen {
 		this.ctx = ctx;
 
 		window.addEventListener("pointerdown", () => {
-			this.paths.push([
-				{
-					x: window.drawAppStore.mouse.x,
-					y: window.drawAppStore.mouse.y,
-				},
-			]);
+			if (localStorage.activeDrawTool === "pen") {
+				this.paths.push([
+					{
+						x: window.drawAppStore.mouse.x,
+						y: window.drawAppStore.mouse.y,
+					},
+				]);
+			}
 		});
 	}
 
 	draw = () => {
-		if (localStorage.activeDrawTool !== "pen") {
-			return;
-		}
-
 		if (this.paths.length > 0) {
 			for (let i = 0; i < this.paths.length; i++) {
 				this.ctx.beginPath();
@@ -39,10 +37,13 @@ export class Pen {
 
 		const thisManyPaths = this.paths.length;
 		const lastPath = this.paths[thisManyPaths - 1];
-		const pointsInLastPath = lastPath.length;
-		const lastPoint = lastPath[pointsInLastPath - 1];
+
+		const pointsInLastPath = lastPath ? lastPath.length : false;
+		const lastPoint = pointsInLastPath ? lastPath[pointsInLastPath - 1] : false;
 
 		if (
+			localStorage.activeDrawTool === "pen" &&
+			lastPoint &&
 			lastPoint?.x &&
 			lastPoint?.y &&
 			(lastPoint.x !== window.drawAppStore.mouse.x ||

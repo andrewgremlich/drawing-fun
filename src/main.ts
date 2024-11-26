@@ -4,16 +4,20 @@ import "./store";
 import { createToolbar } from "./toolbar";
 import { Canvas } from "./Canvas";
 import { Pen } from "./Pen";
+import { Circle } from "./Circle";
+import { Square } from "./Square";
 
 createToolbar();
 
 const canvas = new Canvas();
 
 const pen = new Pen(canvas.ctx);
+const circle = new Circle(canvas.ctx);
+const square = new Square(canvas.ctx);
 
 canvas.draw([pen.draw])();
 
-window.requestAnimationFrame(canvas.draw([pen.draw]));
+window.requestAnimationFrame(canvas.draw([pen.draw, circle.draw, square.draw]));
 
 window.addEventListener(
 	"pointermove",
@@ -32,16 +36,6 @@ window.addEventListener(
 		};
 	},
 );
-
-// window.addEventListener("drag", () => {
-// 	console.log("drag");
-// 	if (window.drawAppStore.interaction.buttonClicks === undefined) {
-// 		window.drawAppStore.interaction.buttonClicks = 0;
-// 	}
-
-// 	window.drawAppStore.interaction.buttonClicks += 1;
-// 	window.drawAppStore.interaction.button = true;
-// });
 
 // There needs to be one event listener for the mousemove event that
 // updates the cursor's x and y coordinates. This will feed into Circle, Square, and Draw.

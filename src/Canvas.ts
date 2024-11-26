@@ -29,8 +29,6 @@ export class Canvas {
 	draw = (drawFunctions: [() => void] | null) => () => {
 		this.clearCanvas();
 
-		// this.ctx.fillRect(225, 225, 100, 100);
-
 		if (drawFunctions) {
 			for (const drawFunction of drawFunctions) {
 				drawFunction();

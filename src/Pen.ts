@@ -5,7 +5,7 @@ export class Pen {
 	constructor(ctx: CanvasRenderingContext2D) {
 		this.ctx = ctx;
 
-		window.addEventListener("mousedown", () => {
+		window.addEventListener("pointerdown", () => {
 			this.paths.push([
 				{
 					x: window.drawAppStore.mouse.x,

@@ -24,7 +24,7 @@ canvas.ctx.canvas.addEventListener("mouseout", () => {
 });
 
 window.addEventListener(
-	"mousemove",
+	"pointermove",
 	({ clientX, clientY, ctrlKey, altKey, shiftKey, buttons }) => {
 		window.drawAppStore = {
 			mouse: {

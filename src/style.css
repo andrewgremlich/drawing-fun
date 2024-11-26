@@ -22,7 +22,6 @@ div#toolbar {
   background-color: #333;
   color: white;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 20px;
 
@@ -33,6 +32,7 @@ div#toolbar {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    margin-right: 10px;
   }
 
   .toolbar-button:hover {

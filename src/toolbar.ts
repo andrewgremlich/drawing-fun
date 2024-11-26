@@ -1,6 +1,22 @@
 const toolbar = document.getElementById("toolbar") as HTMLElement;
 
-const PenIconRaw = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+const GenerateToolbarButton = (icon: string, title: string) => {
+	const button = document.createElement("button");
+
+	button.innerHTML = icon;
+	button.classList.add("toolbar-button");
+	button.title = title;
+
+	button.addEventListener("click", () => {
+		button.classList.toggle("active");
+	});
+
+	// NOTE: window unload to remove event? not completely necessary but interesting
+
+	return button;
+};
+
+const rawPen = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
   class="feather feather-pen-tool">
   <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
@@ -8,16 +24,19 @@ const PenIconRaw = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="2
   <path d="M2 2l7.586 7.586"></path>
   <circle cx="11" cy="11" r="2"></circle>
 </svg>`;
-
-const PenIconButton = () => {
-	const button = document.createElement("button");
-
-	button.innerHTML = PenIconRaw;
-	button.classList.add("toolbar-button");
-  
-  return button;
-};
+const rawSquare = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round" class="feather feather-square">
+  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+</svg>`;
+const rawCircle = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round" class="feather feather-circle">
+  <circle cx="12" cy="12" r="10"></circle>
+</svg>`;
 
 export const createToolbar = () => {
-	toolbar.append(PenIconButton());
+	toolbar.append(GenerateToolbarButton(rawPen, "Pen"));
+	toolbar.append(GenerateToolbarButton(rawSquare, "Square"));
+	toolbar.append(GenerateToolbarButton(rawCircle, "Circle"));
 };

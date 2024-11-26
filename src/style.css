@@ -4,14 +4,13 @@
   padding: 0;
 }
 
-html, body {
-  width: 100%;
+html,
+body {
   height: 100%;
 }
 
 canvas#drawing-surface {
-  height: 100%;
-  width: 100%;
+  display: block;
 }
 
 div#toolbar {
@@ -25,7 +24,7 @@ div#toolbar {
   align-items: center;
   padding: 20px;
 
-  .toolbar-button {
+  .toolbar-radio {
     background-color: #555;
     color: white;
     border: none;
@@ -33,13 +32,17 @@ div#toolbar {
     border-radius: 5px;
     cursor: pointer;
     margin-right: 10px;
+
+    & input[type="radio"] {
+      display: none;
+    }
+
+    &:has(input[type="radio"]:checked) {
+      background-color: #222;
+    }
   }
 
   .toolbar-button:hover {
     background-color: #777;
-  }
-
-  .active {
-    background-color: #999;
   }
 }

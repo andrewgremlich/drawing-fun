@@ -17,34 +17,34 @@ const rawCircle = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24
   <circle cx="12" cy="12" r="10"></circle>
 </svg>`;
 
-const GenerateToolbarButton = (
-	icon: string,
-	title: string,
-	options?: { isDefault: boolean },
-) => {
-	const button = document.createElement("button");
+const GenerateToolbarRadio = (icon: string, title: string) => {
+	const radio = document.createElement("input");
+	const radioLabel = document.createElement("label");
 
-	button.innerHTML = icon;
-	button.classList.add("toolbar-button");
-	button.title = title;
+	radio.type = "radio";
+	radio.name = "toolbar";
+	radio.value = title.toLowerCase();
 
-	if (options?.isDefault) {
-		button.classList.add("active");
+	if (!localStorage.activeDrawTool) {
+		localStorage.activeDrawTool = "pen";
 	}
 
-	button.addEventListener("click", () => {
-		button.classList.toggle("active");
+	radio.checked = localStorage.activeDrawTool === title.toLowerCase();
+
+	radioLabel.classList.add("toolbar-radio");
+	radioLabel.innerHTML = icon;
+	radioLabel.addEventListener("click", () => {
+		localStorage.activeDrawTool = title.toLowerCase();
 	});
+	radioLabel.append(radio);
 
-	// NOTE: window unload to remove event? not completely necessary but interesting
-
-	return button;
+	return radioLabel;
 };
 
 export const createToolbar = () => {
 	const toolbar = document.getElementById("toolbar") as HTMLElement;
 
-	toolbar.append(GenerateToolbarButton(rawPen, "Pen", { isDefault: true }));
-	toolbar.append(GenerateToolbarButton(rawSquare, "Square"));
-	toolbar.append(GenerateToolbarButton(rawCircle, "Circle"));
+	toolbar.append(GenerateToolbarRadio(rawPen, "Pen"));
+	toolbar.append(GenerateToolbarRadio(rawSquare, "Square"));
+	toolbar.append(GenerateToolbarRadio(rawCircle, "Circle"));
 };

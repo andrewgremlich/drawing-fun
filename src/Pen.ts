@@ -11,6 +11,17 @@ export class Pen {
 			return;
 		}
 
+		if (this.path.length > 0) {
+			this.ctx.beginPath();
+			this.ctx.moveTo(this.path[0].x, this.path[0].y);
+
+			for (let i = 1; i < this.path.length; i++) {
+				this.ctx.lineTo(this.path[i].x, this.path[i].y);
+			}
+
+			this.ctx.stroke();
+		}
+
 		if (!window.drawAppStore.interaction.button) {
 			return;
 		}
@@ -20,14 +31,12 @@ export class Pen {
 				x: window.drawAppStore.mouse.x,
 				y: window.drawAppStore.mouse.y,
 			});
-
-			return;
 		}
 
 		const lastPoint = this.path[this.path.length - 1];
 
 		if (
-			lastPoint.x !== window.drawAppStore.mouse.x &&
+			lastPoint.x !== window.drawAppStore.mouse.x ||
 			lastPoint.y !== window.drawAppStore.mouse.y
 		) {
 			this.path.push({
@@ -35,14 +44,5 @@ export class Pen {
 				y: window.drawAppStore.mouse.y,
 			});
 		}
-
-		this.ctx.beginPath();
-		this.ctx.moveTo(this.path[0].x, this.path[0].y);
-		
-		for (let i = 1; i < this.path.length; i++) {
-			this.ctx.lineTo(this.path[i].x, this.path[i].y);
-		}
-
-		this.ctx.stroke();
 	};
 }

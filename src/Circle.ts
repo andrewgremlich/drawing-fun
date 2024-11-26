@@ -7,8 +7,18 @@ export class Circle {
 	constructor(ctx: CanvasRenderingContext2D) {
 		this.ctx = ctx;
 
-		window.addEventListener("pointerdown", () => {
-			if (!this.startingPoint && localStorage.activeDrawTool === "circle") {
+		window.addEventListener("pointerdown", (evt) => {
+			const targetElement = evt.target as HTMLElement;
+
+			if (!targetElement) {
+				return;
+			}
+
+			if (
+				targetElement.localName === "canvas" &&
+				!this.startingPoint &&
+				localStorage.activeDrawTool === "circle"
+			) {
 				this.startingPoint = {
 					x: window.drawAppStore.mouse.x,
 					y: window.drawAppStore.mouse.y,

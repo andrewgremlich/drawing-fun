@@ -5,8 +5,17 @@ export class Pen {
 	constructor(ctx: CanvasRenderingContext2D) {
 		this.ctx = ctx;
 
-		window.addEventListener("pointerdown", () => {
-			if (localStorage.activeDrawTool === "pen") {
+		window.addEventListener("pointerdown", (evt) => {
+			const targetElement = evt.target as HTMLElement;
+
+			if (!targetElement) {
+				return;
+			}
+
+			if (
+				targetElement.localName === "canvas" &&
+				localStorage.activeDrawTool === "pen"
+			) {
 				this.paths.push([
 					{
 						x: window.drawAppStore.mouse.x,

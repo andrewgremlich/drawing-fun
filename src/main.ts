@@ -1,7 +1,9 @@
 import "./style.css";
 
 import { createToolbar } from "./toolbar";
-import { loadCanvas } from "./canvas";
+import { Canvas } from "./canvas";
 
 createToolbar();
-loadCanvas();
+const ctx = Canvas();
+
+console.log(ctx);

@@ -38,4 +38,8 @@ div#toolbar {
   .toolbar-button:hover {
     background-color: #777;
   }
+
+  .active {
+    background-color: #999;
+  }
 }

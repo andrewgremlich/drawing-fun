@@ -2,17 +2,16 @@ export const drawingSurface = document.getElementById(
 	"drawing-surface",
 ) as HTMLCanvasElement;
 
-const Canvas = () => {
+export const Canvas = () => {
 	if (drawingSurface.getContext) {
 		console.log("Canvas supported");
 		const canvasCtx = drawingSurface.getContext(
 			"2d",
 		) as CanvasRenderingContext2D;
-	} else {
+
+		return canvasCtx;
+	// biome-ignore lint/style/noUselessElse: just to show error if canvas not supported
+}  else {
 		console.error("Canvas not supported");
 	}
-};
-
-export const loadCanvas = () => {
-	window.addEventListener("load", Canvas);
 };

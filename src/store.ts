@@ -7,7 +7,7 @@ window.drawAppStore = {
 	interaction: {
 		ctrlKey: false,
 		altKey: false,
-		button: false,
+		buttonOn: false,
 		shiftKey: false,
 	},
 };

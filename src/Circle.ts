@@ -10,7 +10,7 @@ export class Circle {
 			return;
 		}
 
-		if (!window.drawAppStore.interaction.button) {
+		if (!window.drawAppStore.interaction.buttonOn) {
 			return;
 		}
 	}

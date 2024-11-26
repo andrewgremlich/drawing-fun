@@ -2,8 +2,8 @@
 export type Interaction = {
 	ctrlKey: boolean;
 	altKey: boolean;
-	button: boolean;
 	shiftKey: boolean;
+	buttonOn: boolean;
 };
 
 declare global {

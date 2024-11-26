@@ -1,9 +1,18 @@
 export class Pen {
 	ctx: CanvasRenderingContext2D;
-	path: { x: number; y: number }[] = [];
+	paths: { x: number; y: number }[][] = [];
 
 	constructor(ctx: CanvasRenderingContext2D) {
 		this.ctx = ctx;
+
+		window.addEventListener("mousedown", () => {
+			this.paths.push([
+				{
+					x: window.drawAppStore.mouse.x,
+					y: window.drawAppStore.mouse.y,
+				},
+			]);
+		});
 	}
 
 	draw = () => {
@@ -11,35 +20,35 @@ export class Pen {
 			return;
 		}
 
-		if (this.path.length > 0) {
-			this.ctx.beginPath();
-			this.ctx.moveTo(this.path[0].x, this.path[0].y);
+		if (this.paths.length > 0) {
+			for (let i = 0; i < this.paths.length; i++) {
+				this.ctx.beginPath();
+				this.ctx.moveTo(this.paths[i][0].x, this.paths[i][0].y);
 
-			for (let i = 1; i < this.path.length; i++) {
-				this.ctx.lineTo(this.path[i].x, this.path[i].y);
+				for (let j = 1; j < this.paths[i].length; j++) {
+					this.ctx.lineTo(this.paths[i][j].x, this.paths[i][j].y);
+				}
+
+				this.ctx.stroke();
 			}
-
-			this.ctx.stroke();
 		}
 
-		if (!window.drawAppStore.interaction.button) {
+		if (!window.drawAppStore.interaction.buttonOn) {
 			return;
 		}
 
-		if (this.path.length === 0) {
-			this.path.push({
-				x: window.drawAppStore.mouse.x,
-				y: window.drawAppStore.mouse.y,
-			});
-		}
-
-		const lastPoint = this.path[this.path.length - 1];
+		const thisManyPaths = this.paths.length;
+		const lastPath = this.paths[thisManyPaths - 1];
+		const pointsInLastPath = lastPath.length;
+		const lastPoint = lastPath[pointsInLastPath - 1];
 
 		if (
-			lastPoint.x !== window.drawAppStore.mouse.x ||
-			lastPoint.y !== window.drawAppStore.mouse.y
+			lastPoint?.x &&
+			lastPoint?.y &&
+			(lastPoint.x !== window.drawAppStore.mouse.x ||
+				lastPoint.y !== window.drawAppStore.mouse.y)
 		) {
-			this.path.push({
+			this.paths[this.paths.length - 1].push({
 				x: window.drawAppStore.mouse.x,
 				y: window.drawAppStore.mouse.y,
 			});

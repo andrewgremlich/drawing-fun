@@ -25,7 +25,7 @@ canvas.ctx.canvas.addEventListener("mouseout", () => {
 
 window.addEventListener(
 	"mousemove",
-	({ clientX, clientY, ctrlKey, altKey, buttons, shiftKey }) => {
+	({ clientX, clientY, ctrlKey, altKey, shiftKey, buttons }) => {
 		window.drawAppStore = {
 			mouse: {
 				x: clientX,
@@ -34,12 +34,22 @@ window.addEventListener(
 			interaction: {
 				ctrlKey,
 				altKey,
-				button: buttons === 1,
 				shiftKey,
+				buttonOn: buttons === 1,
 			},
 		};
 	},
 );
+
+// window.addEventListener("drag", () => {
+// 	console.log("drag");
+// 	if (window.drawAppStore.interaction.buttonClicks === undefined) {
+// 		window.drawAppStore.interaction.buttonClicks = 0;
+// 	}
+
+// 	window.drawAppStore.interaction.buttonClicks += 1;
+// 	window.drawAppStore.interaction.button = true;
+// });
 
 // There needs to be one event listener for the mousemove event that
 // updates the cursor's x and y coordinates. This will feed into Circle, Square, and Draw.

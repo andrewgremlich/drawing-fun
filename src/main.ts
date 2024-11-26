@@ -13,15 +13,7 @@ const pen = new Pen(canvas.ctx);
 
 canvas.draw([pen.draw])();
 
-canvas.ctx.canvas.addEventListener("mouseover", () => {
-	canvas.raf = window.requestAnimationFrame(canvas.draw([pen.draw]));
-});
-
-canvas.ctx.canvas.addEventListener("mouseout", () => {
-	if (canvas.raf) {
-		window.cancelAnimationFrame(canvas.raf);
-	}
-});
+window.requestAnimationFrame(canvas.draw([pen.draw]));
 
 window.addEventListener(
 	"pointermove",

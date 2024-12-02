@@ -18,8 +18,8 @@ export class Pen {
 			) {
 				this.paths.push([
 					{
-						x: window.drawAppStore.mouse.x,
-						y: window.drawAppStore.mouse.y,
+						x: evt.clientX ?? window.drawAppStore.mouse.x,
+						y: evt.clientY ?? window.drawAppStore.mouse.y,
 					},
 				]);
 			}

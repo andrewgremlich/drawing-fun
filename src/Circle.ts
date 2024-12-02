@@ -20,8 +20,8 @@ export class Circle {
 				localStorage.activeDrawTool === "circle"
 			) {
 				this.startingPoint = {
-					x: window.drawAppStore.mouse.x,
-					y: window.drawAppStore.mouse.y,
+					x: evt.clientX ?? window.drawAppStore.mouse.x,
+					y: evt.clientY ?? window.drawAppStore.mouse.y,
 				};
 			}
 		});

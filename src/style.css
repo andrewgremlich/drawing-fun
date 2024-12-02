@@ -16,7 +16,7 @@ body {
 
 canvas#drawing-surface {
   display: block;
-  cursor: crosshair;
+  cursor: url('edit-2.svg') 0 24, crosshair;
 }
 
 div#toolbar {

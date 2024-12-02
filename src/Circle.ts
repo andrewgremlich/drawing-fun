@@ -19,9 +19,12 @@ export class Circle {
 				!this.startingPoint &&
 				localStorage.activeDrawTool === "circle"
 			) {
+				window.drawAppStore.mouse.x = evt.clientX;
+				window.drawAppStore.mouse.y = evt.clientY;
+
 				this.startingPoint = {
-					x: evt.clientX ?? window.drawAppStore.mouse.x,
-					y: evt.clientY ?? window.drawAppStore.mouse.y,
+					x: evt.clientX,
+					y: evt.clientY,
 				};
 			}
 		});
@@ -47,9 +50,9 @@ export class Circle {
 			this.ctx.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2);
 			this.ctx.fillStyle = "blue";
 			this.ctx.fill();
-			this.ctx.strokeStyle = "black";
-			this.ctx.lineWidth = 3;
-			this.ctx.stroke();
+			// this.ctx.strokeStyle = "black";
+			// this.ctx.lineWidth = 3;
+			// this.ctx.stroke();
 		}
 
 		if (!window.drawAppStore.interaction.buttonOn) {
@@ -75,8 +78,8 @@ export class Circle {
 		);
 		this.ctx.fillStyle = "blue";
 		this.ctx.fill();
-		this.ctx.strokeStyle = "black";
-		this.ctx.lineWidth = 3;
-		this.ctx.stroke();
+		// this.ctx.strokeStyle = "black";
+		// this.ctx.lineWidth = 3;
+		// this.ctx.stroke();
 	};
 }

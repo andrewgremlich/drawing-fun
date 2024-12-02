@@ -16,10 +16,13 @@ export class Pen {
 				targetElement.localName === "canvas" &&
 				localStorage.activeDrawTool === "pen"
 			) {
+				window.drawAppStore.mouse.x = evt.clientX;
+				window.drawAppStore.mouse.y = evt.clientY;
+
 				this.paths.push([
 					{
-						x: evt.clientX ?? window.drawAppStore.mouse.x,
-						y: evt.clientY ?? window.drawAppStore.mouse.y,
+						x: window.drawAppStore.mouse.x,
+						y: window.drawAppStore.mouse.y,
 					},
 				]);
 			}

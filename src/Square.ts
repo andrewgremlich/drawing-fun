@@ -20,9 +20,12 @@ export class Square {
 				!this.startingPoint &&
 				localStorage.activeDrawTool === "square"
 			) {
+				window.drawAppStore.mouse.x = evt.clientX;
+				window.drawAppStore.mouse.y = evt.clientY;
+
 				this.startingPoint = {
-					x: evt.clientX ?? window.drawAppStore.mouse.x,
-					y: evt.clientY ?? window.drawAppStore.mouse.y,
+					x: window.drawAppStore.mouse.x,
+					y: window.drawAppStore.mouse.y,
 				};
 			}
 		});
@@ -48,9 +51,9 @@ export class Square {
 			this.ctx.rect(square.x, square.y, square.width, square.height);
 			this.ctx.fillStyle = "blue";
 			this.ctx.fill();
-			this.ctx.strokeStyle = "black";
-			this.ctx.lineWidth = 3;
-			this.ctx.stroke();
+			// this.ctx.strokeStyle = "black";
+			// this.ctx.lineWidth = 3;
+			// this.ctx.stroke();
 		}
 
 		if (localStorage.activeDrawTool !== "square") {
